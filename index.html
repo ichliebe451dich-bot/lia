@@ -10,7 +10,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: "Poppins", sans-serif;
+    font-family:"Poppins",sans-serif;
 }
 
 body{
@@ -28,7 +28,6 @@ body{
     inset:0;
 }
 
-/* Bulan */
 .moon{
     position:absolute;
     top:70px;
@@ -51,7 +50,6 @@ body{
     top:10px;
 }
 
-/* Bintang */
 .star{
     position:absolute;
     width:3px;
@@ -72,41 +70,198 @@ body{
 /* ===================== */
 
 #doorContainer{
-    position:absolute;
+    position:fixed;
     inset:0;
     display:flex;
     justify-content:center;
     align-items:center;
-    z-index:5;
+    z-index:100;
+    background:#111;
 }
 
 #door{
-    width:220px;
-    height:360px;
+    width:100vw;
+    height:100vh;
     background:linear-gradient(#8b5a2b,#6b3f17);
-    border:8px solid #4d2c10;
-    border-radius:8px;
     cursor:pointer;
     position:relative;
     transform-origin:left;
-    transition:1.8s;
-    box-shadow:0 0 30px rgba(0,0,0,.5);
+    transition:2.5s;
+    overflow:hidden;
+    box-shadow:inset 0 0 100px rgba(0,0,0,.4);
+}
+
+#door::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+    repeating-linear-gradient(
+        to right,
+        rgba(0,0,0,.18) 0px,
+        rgba(0,0,0,.18) 5px,
+        transparent 5px,
+        transparent 120px
+    );
 }
 
 #door::before{
     content:"";
     position:absolute;
-    width:18px;
-    height:18px;
+    width:24px;
+    height:24px;
     border-radius:50%;
     background:gold;
-    right:18px;
+    right:45px;
     top:50%;
+    transform:translateY(-50%);
+    box-shadow:0 0 12px gold;
 }
 
 #doorText{
     position:absolute;
-    bottom:25px;
+    bottom:70px;
+    width:100%;
+    text-align:center;
+    color:white;
+    font-size:32px;
+    letter-spacing:3px;
+    text-shadow:0 0 15px black;
+}
+
+/* ===================== */
+/* KONTEN */
+/* ===================== */
+
+#content{
+    opacity:0;
+    transition:2s;
+    position:absolute;
+    inset:0;
+}
+
+.title{
+    text-align:center;
+    margin-top:40px;
+    font-size:55px;
+    color:white;
+    text-shadow:0 0 20px pink;
+}
+
+.photo{
+    width:320px;
+    max-width:80%;
+    border-radius:25px;
+    border:6px solid white;
+    display:block;
+    margin:45px auto;
+    box-shadow:0 0 35px rgba(255,255,255,.4);
+}
+
+.flowerLeft,
+.flowerRight{
+    position:fixed;
+    bottom:-70px;
+    width:600px;
+    pointer-events:none;
+    z-index:5;
+}
+
+.flowerLeft{
+    left:-80px;
+}
+
+.flowerRight{
+    right:-80px;
+}
+
+.show{
+    opacity:1 !important;
+}
+
+.open{
+    transform:perspective(1200px) rotateY(-110deg);
+}
+</style>
+</head>
+
+<body>
+
+<div class="sky">
+    <div class="moon"></div>
+</div>
+
+<div id="doorContainer">
+    <div id="door">
+        <div id="doorText">🚪 Klik untuk Membuka</div>
+    </div>
+</div>
+
+<div id="content">
+
+    <h1 class="title">Happy Birthday, Julia ❤️</h1>
+
+    <img src="fotbar.png" class="photo">
+
+    <img src="bunga1.png" class="flowerLeft">
+
+    <img src="bunga2.png" class="flowerRight">
+
+</div>
+
+<audio id="music" src="lagu.mp3"></audio>
+
+<script>
+
+/* ====================== */
+/* BINTANG */
+/* ====================== */
+
+const sky=document.querySelector(".sky");
+
+for(let i=0;i<130;i++){
+
+    const star=document.createElement("div");
+
+    star.className="star";
+
+    star.style.left=Math.random()*100+"%";
+    star.style.top=Math.random()*100+"%";
+
+    star.style.animationDelay=Math.random()*5+"s";
+    star.style.animationDuration=(2+Math.random()*4)+"s";
+
+    star.style.transform=`scale(${Math.random()*1.8})`;
+
+    sky.appendChild(star);
+}
+
+/* ====================== */
+/* PINTU */
+/* ====================== */
+
+const door=document.getElementById("door");
+
+door.onclick=()=>{
+
+    door.classList.add("open");
+
+    document.getElementById("music").play();
+
+    setTimeout(()=>{
+
+        document.getElementById("doorContainer").style.display="none";
+
+        document.getElementById("content").classList.add("show");
+
+    },2400);
+
+};
+
+</script>
+
+</body>
+</html>    bottom:25px;
     width:100%;
     text-align:center;
     color:white;
