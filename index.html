@@ -119,14 +119,17 @@ body{
 }
 
 #doorText{
-    position:absolute;
+    position:fixed;
     bottom:70px;
-    width:100%;
-    text-align:center;
+    left:50%;
+    transform:translateX(-50%);
     color:white;
     font-size:32px;
     letter-spacing:3px;
     text-shadow:0 0 15px black;
+    z-index:101;
+    pointer-events:none;
+}
 }
 
 /* ===================== */
@@ -192,9 +195,8 @@ body{
 </div>
 
 <div id="doorContainer">
-    <div id="door">
-        <div id="doorText">🚪 Klik untuk Membuka</div>
-    </div>
+    <div id="door"></div>
+    <div id="doorText">🚪 Klik untuk Membuka</div>
 </div>
 
 <div id="content">
