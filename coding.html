@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Julia ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    overflow:hidden;
+    height:100vh;
+    background:linear-gradient(to bottom,#06142d,#0f274b,#163b69);
+}
+
+/* ===================== */
+/* LANGIT */
+/* ===================== */
+
+.sky{
+    position:fixed;
+    inset:0;
+}
+
+/* Bulan */
+.moon{
+    position:absolute;
+    top:70px;
+    right:130px;
+    width:110px;
+    height:110px;
+    background:#fff8d6;
+    border-radius:50%;
+    box-shadow:0 0 40px #fff6b0;
+}
+
+.moon::after{
+    content:"";
+    position:absolute;
+    width:90px;
+    height:90px;
+    background:#0f274b;
+    border-radius:50%;
+    left:30px;
+    top:10px;
+}
+
+/* Bintang */
+.star{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+    0%{opacity:.2;}
+    50%{opacity:1;}
+    100%{opacity:.2;}
+}
+
+/* ===================== */
+/* PINTU */
+/* ===================== */
+
+#doorContainer{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:5;
+}
+
+#door{
+    width:220px;
+    height:360px;
+    background:linear-gradient(#8b5a2b,#6b3f17);
+    border:8px solid #4d2c10;
+    border-radius:8px;
+    cursor:pointer;
+    position:relative;
+    transform-origin:left;
+    transition:1.8s;
+    box-shadow:0 0 30px rgba(0,0,0,.5);
+}
+
+#door::before{
+    content:"";
+    position:absolute;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:gold;
+    right:18px;
+    top:50%;
+}
+
+#doorText{
+    position:absolute;
+    bottom:25px;
+    width:100%;
+    text-align:center;
+    color:white;
+    font-size:20px;
+}
+
+/* ===================== */
+/* KONTEN */
+/* ===================== */
+
+#content{
+    opacity:0;
+    transition:2s;
+    position:absolute;
+    inset:0;
+}
+
+.title{
+    text-align:center;
+    margin-top:40px;
+    font-size:55px;
+    color:white;
+    text-shadow:0 0 20px pink;
+}
+
+/* Foto */
+.photo{
+    width:320px;
+    max-width:80%;
+    border-radius:25px;
+    border:6px solid white;
+    display:block;
+    margin:45px auto;
+    box-shadow:0 0 35px rgba(255,255,255,.4);
+}
+
+/* Bunga */
+.flowerLeft,
+.flowerRight{
+    position:fixed;
+    bottom:0;
+    width:260px;
+    pointer-events:none;
+}
+
+.flowerLeft{
+    left:0;
+}
+
+.flowerRight{
+    right:0;
+}
+
+/* Efek muncul */
+.show{
+    opacity:1 !important;
+}
+
+/* buka pintu */
+.open{
+    transform:perspective(1000px) rotateY(-110deg);
+}
+</style>
+</head>
+
+<body>
+
+<div class="sky">
+
+    <div class="moon"></div>
+
+</div>
+
+<div id="doorContainer">
+    <div id="door">
+        <div id="doorText">🚪 Klik untuk Membuka</div>
+    </div>
+</div>
+
+<div id="content">
+
+    <h1 class="title">Happy Birthday, Julia ❤️</h1>
+
+    <img src="fotbar.png" class="photo">
+
+    <img src="bunga1.png" class="flowerLeft">
+
+    <img src="bunga2.png" class="flowerRight">
+
+</div>
+
+<audio id="music" src="lagu.mp3"></audio>
+
+<script>
+
+/* ====================== */
+/* BINTANG */
+/* ====================== */
+
+const sky=document.querySelector(".sky");
+
+for(let i=0;i<130;i++){
+
+    const star=document.createElement("div");
+
+    star.className="star";
+
+    star.style.left=Math.random()*100+"%";
+
+    star.style.top=Math.random()*100+"%";
+
+    star.style.animationDelay=Math.random()*5+"s";
+
+    star.style.animationDuration=(2+Math.random()*4)+"s";
+
+    star.style.transform=`scale(${Math.random()*1.8})`;
+
+    sky.appendChild(star);
+}
+
+/* ====================== */
+/* PINTU */
+/* ====================== */
+
+const door=document.getElementById("door");
+
+door.onclick=()=>{
+
+    door.classList.add("open");
+
+    document.getElementById("music").play();
+
+    setTimeout(()=>{
+
+        document.getElementById("doorContainer").style.display="none";
+
+        document.getElementById("content").classList.add("show");
+
+    },1700);
+
+};
+
+</script>
+
+</body>
+</html>
